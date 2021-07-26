@@ -16,7 +16,7 @@ width=128
 phase_train=tf.placeholder(tf.bool)
 epo_range=50
 train_h5F_addr="/media/kenny/Data/training_data/gdsr_train_data/4x_data/shuffle_version/4x_training_data.h5"
-total_pat=244992
+total_pat=220416
 LR_height=height/up_factor
 LR_width=width/up_factor
 batch_total=total_pat/batch_sz
@@ -76,10 +76,10 @@ with h5py.File(train_h5F_addr,"r") as train_file:
                 gen_pat_ind_range=range(ind*batch_sz,(ind+1)*batch_sz,1)
                 gen_inten_bat,gen_gth_dep_bat,gen_LR_dep_bat=gslb.reading_data(train_file, gen_pat_ind_range, HR_batch_dims, LR_batch_dims)
                 sess.run(train_op,feed_dict={HR_inten_batch_input:gen_inten_bat,HR_depth_batch_input:gen_gth_dep_bat,LR_depth_batch_input:gen_LR_dep_bat,phase_train:True})
-                if (ind+1)%957==0:
+                if (ind+1)%861==0:
                     train_mse_loss=loss.eval(feed_dict={HR_inten_batch_input:gen_inten_bat,HR_depth_batch_input:gen_gth_dep_bat,LR_depth_batch_input:gen_LR_dep_bat,phase_train:True})
                     print("step %d, training loss %g"%(ind, train_mse_loss))
-                if (ind+1)%3828==0:
+                if (ind+1)%3444==0:
                     save_path=saver_full.save(sess,"/media/kenny/Data/trained_models/residual_dense_models/noise_free/4x/l1loss/full_model1/4x_nf_full_model.ckpt",global_step=model_ind)
                     print("Full Model saved in file: %s" % save_path)
                     model_ind=model_ind+1
