@@ -1,0 +1,4 @@
+This folder has two types of files, i.e., training_data_generator, shuffle_training_data. 
+Training_data_generator file crops the correponding images into patches one by one, and writes these patches into h5 file. The original resolution of the HR image is 512*512 and the resolution of the patch is 128*128 with 64 pixels overlap, so one HR image maps to 49 patches. The default setting is 4500 images for training, and 500 images for validation. Therefore, 49*4500=220500 patches for training, and 49*500=24500 patches for validation.
+Shuffle_training_data file shuffles the training and validation patches, respectively.
+The user can modify the default setting of 5000 images for training and validation, and the numbers of patches for training and validation should be re-computed accordingly.
